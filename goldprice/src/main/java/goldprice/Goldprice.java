@@ -1,5 +1,6 @@
 package goldprice;
 
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -7,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+
+import io.opentelemetry.exporter.logging.SystemOutLogRecordExporter;
 
 public class Goldprice {
 
@@ -17,22 +20,21 @@ public class Goldprice {
 		driver.manage().window().maximize();
 	}
 
-	public String table(String gdate) throws InterruptedException {
-		
+	public void table(String gdate) throws InterruptedException {
 		
 		//Actions a = new Actions(driver);
 		//a.sendKeys(Keys.PAGE_DOWN).build().perform();
 		//div[@id='gold-tit']/following-sibling::*/tbody/tr/td/*[contains(text(),'25')]
+		openWindow();
 		
 		try {
 		String day="//div[@id='gold-tit']/following-sibling::*/tbody/tr/td[1]/*[starts-with(normalize-space(),'"+ gdate +"')]/ancestor::tr/td[2]";
 		WebElement price=driver.findElement(By.xpath(day));
 		System.out.println(gdate +"-" + price.getText());
-		return price.getText();
+		System.out.println(price.getText());
 		}
 		catch(org.openqa.selenium.NoSuchElementException e) {
 			System.out.println(gdate +"-" +" no price available");
-			return "";
 		}
 	//	WebElement day25=driver.findElement(By.xpath("//div[@id='gold-tit']/following-sibling::*/tbody/tr[6]/td[1]"));
 	//	System.out.println("..");
@@ -65,7 +67,9 @@ public class Goldprice {
 	name.sendKeys("abi");
 	
 */	
-	
+		public void exit() {
+			driver.quit();
+		}
 	
 	
 	
