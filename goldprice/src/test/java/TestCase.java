@@ -10,7 +10,13 @@ public class TestCase {
 		
 		//format - 04/December/2023
 		
-		gp.table("12/December/2023");
+		Double value = gp.table("12/December/2023");
+		if(value < 1){
+			System.out.println("failed");
+		}else {
+			System.out.println("Passed");
+		}
+		
 		gp.exit();
 	}
 }
