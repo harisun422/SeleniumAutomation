@@ -18,7 +18,7 @@ public class TestCase {
 		//format - 04/December/2023
 		String provided_day = System.getProperty("DAY");
 		System.out.println("aaa"+provided_day+"bbbb");
-		if(provided_day == null || provided_day == "") {
+		if(provided_day.isEmpty() || provided_day.length() < 6 || provided_day == null) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMMM/YYYY");
 		Date date = new Date();  
 		String today_date =(dateFormat.format(date));
