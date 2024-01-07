@@ -37,13 +37,13 @@ public class TestCase {
 		if(value < 1){
 			System.out.println("failed");
 			try {
-			send_sms_twilio(fetched_date,false);
+			//send_sms_twilio(fetched_date,false);
 			}catch(com.twilio.exception.ApiException e) {
 				System.out.println(e);
 			}
 		}else {
 			System.out.println("Passed");
-			send_sms_twilio(fetched_date,value);
+			//send_sms_twilio(fetched_date,value);
 		}
 		
 		
