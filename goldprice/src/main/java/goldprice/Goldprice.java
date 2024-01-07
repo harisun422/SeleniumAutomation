@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.opentelemetry.exporter.logging.SystemOutLogRecordExporter;
 
 public class Goldprice {
@@ -19,7 +20,10 @@ public class Goldprice {
 		options.addArguments("--disable-extensions");
 		options.addArguments("--disable-gpu");
 		options.addArguments("--no-sandbox");
-	   driver=new ChromeDriver(options);
+		WebDriverManager.chromedriver().setup();
+		driver = new ChromeDriver(options);
+	   
+		//driver=new ChromeDriver(options);
 		driver.get("https://www.livechennai.com/gold_silverrate.asp");
 		driver.manage().window().maximize();
 	}
