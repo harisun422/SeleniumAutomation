@@ -49,6 +49,10 @@ public class Goldprice {
 			System.out.println(gdate +"-" +" no price available");
 			System.out.println("Exception occured");
 		}
+		catch(Exception e) {
+			System.out.println("Exception occured "+ e);
+		}
+		
 		return gold;
 	//	WebElement day25=driver.findElement(By.xpath("//div[@id='gold-tit']/following-sibling::*/tbody/tr[6]/td[1]"));
 	//	System.out.println("..");

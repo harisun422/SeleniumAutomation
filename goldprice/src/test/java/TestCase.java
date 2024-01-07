@@ -37,13 +37,13 @@ public class TestCase {
 		if(value[0] < 1 || value[1] <1){
 			System.out.println("failed");
 			try {
-			send_sms_twilio("Couln't find Gold rate fetching failed, check mail for any exception");
+			//send_sms_twilio("Couln't find Gold rate fetching failed, check mail for any exception");
 			}catch(com.twilio.exception.ApiException e) {
 				System.out.println(e);
 			}
 		}else {
 			System.out.println("Passed");
-			send_sms_twilio("Gold Rate on "+ fetched_date + "\n for 24K is "+value[0]+ "\n for 22K is "+value[1]);
+			//send_sms_twilio("Gold Rate on "+ fetched_date + "\n for 24K is "+value[0]+ "\n for 22K is "+value[1]);
 		}
 		
 		
