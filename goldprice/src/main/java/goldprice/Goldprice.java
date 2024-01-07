@@ -20,10 +20,9 @@ public class Goldprice {
 		options.addArguments("--disable-extensions");
 		options.addArguments("--disable-gpu");
 		options.addArguments("--no-sandbox");
-		WebDriverManager.chromedriver().setup();
+		//WebDriverManager.chromedriver().setup();
 		driver = new ChromeDriver(options);
 	   
-		//driver=new ChromeDriver(options);
 		driver.get("https://www.livechennai.com/gold_silverrate.asp");
 		driver.manage().window().maximize();
 	}
