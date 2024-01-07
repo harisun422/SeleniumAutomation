@@ -17,7 +17,6 @@ public class TestCase {
 		String fetched_date = null;
 		//format - 04/December/2023
 		String provided_day = System.getProperty("DAY");
-		System.out.println("aaa"+provided_day+"bbbb");
 		if(provided_day.isEmpty() || provided_day.length() < 6 || provided_day == null) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMMM/YYYY");
 		Date date = new Date();  
@@ -38,13 +37,13 @@ public class TestCase {
 		if(value[0] < 1 || value[1] <1){
 			System.out.println("failed");
 			try {
-			//send_sms_twilio("Couln't find Gold rate fetching failed, check mail for any exception");
+			send_sms_twilio("Couln't find Gold rate fetching failed, check mail for any exception");
 			}catch(com.twilio.exception.ApiException e) {
 				System.out.println(e);
 			}
 		}else {
 			System.out.println("Passed");
-			//send_sms_twilio("Gold Rate on "+ fetched_date + "\n for 24K is "+value[0]+ "\n for 22K is "+value[1]);
+			send_sms_twilio("Gold Rate on "+ fetched_date + "\n for 24K is "+value[0]+ "\n for 22K is "+value[1]);
 		}
 		
 		
