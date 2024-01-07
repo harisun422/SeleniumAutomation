@@ -17,6 +17,7 @@ public class TestCase {
 		String fetched_date = null;
 		//format - 04/December/2023
 		String provided_day = System.getProperty("DAY");
+		System.out.println("aaa"+provided_day+"bbbb");
 		if(provided_day == null || provided_day == "") {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMMM/YYYY");
 		Date date = new Date();  
@@ -26,7 +27,7 @@ public class TestCase {
 		fetched_date = today_date;
 		}else {
 			fetched_date = provided_day;
-			System.out.println("requested date: "+provided_day);
+			System.out.println("requested date: "+provided_day+";");
 			value = gp.table(provided_day);
 			
 		}
