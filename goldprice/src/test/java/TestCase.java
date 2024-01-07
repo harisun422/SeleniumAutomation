@@ -13,7 +13,7 @@ public class TestCase {
 	@Test
 	public void testone() throws InterruptedException {
 		Goldprice gp =new Goldprice();
-		Double value = 0.0;
+		Double[] value = {0.0,0.0};
 		String fetched_date = null;
 		//format - 04/December/2023
 		String provided_day = System.getProperty("DAY");
@@ -34,38 +34,24 @@ public class TestCase {
 		gp.exit();
 		
 		
-		if(value < 1){
+		if(value[0] < 1 || value[1] <1){
 			System.out.println("failed");
 			try {
-			//send_sms_twilio(fetched_date,false);
+			send_sms_twilio("Couln't find Gold rate fetching failed, check mail for any exception");
 			}catch(com.twilio.exception.ApiException e) {
 				System.out.println(e);
 			}
 		}else {
 			System.out.println("Passed");
-			//send_sms_twilio(fetched_date,value);
+			send_sms_twilio("Gold Rate on "+ fetched_date + "\n for 24K is "+value[0]+ "\n for 22K is "+value[1]);
 		}
 		
 		
 	}
 
 	
-public void send_sms_twilio(String date, boolean result) {
-		
-		System.out.println(System.getenv("TWILIO_ACCOUNT_SID")+ System.getenv("TWILIO_AUTH_TOKEN"));
-		Twilio.init(
-			    System.getenv("TWILIO_ACCOUNT_SID"),
-			    System.getenv("TWILIO_AUTH_TOKEN"));
-		
-		Message.creator(
-			    new PhoneNumber("+919789803687"),
-			    new PhoneNumber("+12018175692"),
-			    "Gold Rate not available on "+ date)
-			  .create();
-
-	}
 	
-	public void send_sms_twilio(String date, double rate) {
+	public void send_sms_twilio(String message) {
 			
 			Twilio.init(
 				    System.getenv("TWILIO_ACCOUNT_SID"),
@@ -74,7 +60,7 @@ public void send_sms_twilio(String date, boolean result) {
 			Message.creator(
 				    new PhoneNumber("+919789803687"),
 				    new PhoneNumber("+12018175692"),
-				    "Gold Rate on "+ date + " is "+rate)
+				    message)
 				  .create();
 	}
 }
