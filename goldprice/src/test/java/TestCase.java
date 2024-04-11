@@ -13,12 +13,12 @@ public class TestCase {
 	@Test
 	public void testone() throws InterruptedException {
 		Goldprice gp =new Goldprice();
-		Double[] value = {0.0,0.0};
+		String[] value = {"",""};
 		String fetched_date = null;
 		//format - 04/December/2023
 		String provided_day = System.getProperty("DAY");
-		if(provided_day.isEmpty() || provided_day.length() < 6 || provided_day == null) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMMM/YYYY");
+		if(provided_day == null || provided_day.isEmpty() || provided_day.length() < 6 ) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMM/YYYY");
 		Date date = new Date();  
 		String today_date =(dateFormat.format(date));
 		System.out.println("today date: "+today_date);
@@ -34,7 +34,7 @@ public class TestCase {
 		gp.exit();
 		
 		
-		if(value[0] < 1 || value[1] <1){
+		if(value[0] == ""|| value[0] == null || value[0]==" "){
 			System.out.println("failed");
 			try {
 			send_sms_twilio("Couln't find Gold rate fetching failed, check mail for any exception");

@@ -17,6 +17,8 @@ public class Goldprice {
 	WebDriver driver;
 	public void openWindow() {
 		ChromeOptions options = new ChromeOptions();
+//		options.addArguments("--headless");
+//		options.setHeadless(true);
 //		options.addArguments("--disable-extensions");
 //		options.addArguments("--disable-gpu");
 //		options.addArguments("--no-sandbox");
@@ -27,21 +29,21 @@ public class Goldprice {
 		driver.manage().window().maximize();
 	}
 
-	public Double[] table(String gdate) throws InterruptedException {
+	public String[] table(String gdate) throws InterruptedException {
 		
 		//Actions a = new Actions(driver);
 		//a.sendKeys(Keys.PAGE_DOWN).build().perform();
 		//div[@id='gold-tit']/following-sibling::*/tbody/tr/td/*[contains(text(),'25')]
 		openWindow();
-		Double[] gold = {0.0,0.0};
+		String[] gold = {"",""};
 		try {
-		String day_24k="//div[@id='gold-tit']/following-sibling::*/tbody/tr/td[1]/*[starts-with(normalize-space(),'"+ gdate +"')]/ancestor::tr/td[2]";
-		String day_22k="//div[@id='gold-tit']/following-sibling::*/tbody/tr/td[1]/*[starts-with(normalize-space(),'"+ gdate +"')]/ancestor::tr/td[4]";
+		String day_24k="//table[contains(@class,'gold-rates')]/tbody//td[contains(text(),'"+gdate+"')]/following-sibling::td[1]";
+		String day_22k="//table[contains(@class,'gold-rates')]/tbody//td[contains(text(),'"+gdate+"')]/following-sibling::td[3]";
 		WebElement price_24k=driver.findElement(By.xpath(day_24k));
 		WebElement price_22k=driver.findElement(By.xpath(day_22k));
 		
-		gold[0] = (Double.parseDouble(price_24k.getText()));
-		gold[1] = (Double.parseDouble(price_22k.getText()));
+		gold[0] = price_24k.getText();
+		gold[1] = price_22k.getText();
 		System.out.println("Gold Rate on "+ gdate + "\n for 24K is "+gold[0]+ "\n for 22K is "+gold[1]);
 		
 		}
