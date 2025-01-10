@@ -4,8 +4,9 @@ import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 
-import java.util.Date;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import goldprice.Goldprice;
 
 public class TestCase {
@@ -18,10 +19,11 @@ public class TestCase {
 		//format - 04/December/2023
 		String provided_day = System.getProperty("DAY");
 		if(provided_day == null || provided_day.isEmpty() || provided_day.length() < 6 ) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MMM/YYYY");
-		Date date = new Date();  
-		String today_date =(dateFormat.format(date));
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MMM/YYYY");
+		LocalDateTime today = LocalDateTime.now();
+		String today_date =today.minusHours(10).format(dateFormat);
 		System.out.println("today date: "+today_date);
+		
 		value = gp.table(today_date);
 		fetched_date = today_date;
 		}else {
@@ -53,14 +55,23 @@ public class TestCase {
 	
 	public void send_sms_twilio(String message) {
 			
-			Twilio.init(
-				    System.getenv("TWILIO_ACCOUNT_SID"),
-				    System.getenv("TWILIO_AUTH_TOKEN"));
-			
-			Message.creator(
-				    new PhoneNumber("+919789803687"),
-				    new PhoneNumber("+12018175692"),
-				    message)
-				  .create();
+		//System.out.println("twilio_account : "+System.getProperty("twilio_account"));
+		//System.out.println("twilio_token : "+System.getProperty("twilio_token"));
+		String ACCOUNT = System.getenv("TWILIO_ACCOUNT_SID")!=null ? System.getenv("TWILIO_ACCOUNT_SID") : System.getProperty("twilio_account") ;
+		String TOKEN = System.getenv("TWILIO_AUTH_TOKEN")!=null ? System.getenv("TWILIO_AUTH_TOKEN") : System.getProperty("twilio_token");
+		
+		Twilio.init(
+			    ACCOUNT,
+			    TOKEN);
+		
+		String toPhNumber = System.getProperty("receiverNum");
+		String fromPhNumber = System.getProperty("twilioVirtualNum");
+		System.out.println("receiverNum: " + toPhNumber);
+		//System.out.println("twilioVirtualNum: " + fromPhNumber);
+		Message.creator(
+			    new PhoneNumber(toPhNumber), //+919789803687
+			    new PhoneNumber(fromPhNumber), //This is the twilio virtual phone number (+12346010578)
+			    message)
+			  .create();
 	}
 }
