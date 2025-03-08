@@ -45,7 +45,11 @@ public class TestCase {
 			}
 		}else {
 			System.out.println("Passed");
+			try {
 			send_sms_twilio("Gold Rate on "+ fetched_date + "\n for 24K is "+value[0]+ "\n for 22K is "+value[1]);
+			}catch(com.twilio.exception.ApiException e) {
+				System.out.println(e);
+			}
 		}
 		
 		
@@ -67,7 +71,7 @@ public class TestCase {
 		String toPhNumber = System.getProperty("receiverNum");
 		String fromPhNumber = System.getProperty("twilioVirtualNum");
 		System.out.println("receiverNum: " + toPhNumber);
-		//System.out.println("twilioVirtualNum: " + fromPhNumber);
+		System.out.println("twilioVirtualNum: " + fromPhNumber);
 		Message.creator(
 			    new PhoneNumber(toPhNumber), //+919789803687
 			    new PhoneNumber(fromPhNumber), //This is the twilio virtual phone number (+12346010578)

@@ -27,6 +27,7 @@ public class Goldprice {
 //		options.addArguments("--no-sandbox");
 		WebDriverManager.chromedriver().setup();
 		String remote_text = System.getProperty("remote");
+		System.out.println("message will be sent from : "+ System.getProperty("twilioVirtualNum"));
 		boolean remote=false;
 		if (remote_text==null || remote_text.contains("f") || remote_text.contains("n") || remote_text.contains("0")) {
 			remote=false;

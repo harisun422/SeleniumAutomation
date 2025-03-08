@@ -13,7 +13,7 @@
 		<remote>false</remote>
         <!--<twilio_useraccount>${twilio_account}</twilio_useraccount>
         <twilio_usertoken>${twilio_token}</twilio_usertoken>-->
-        <twilioVirtualNum>+12346010578</twilioVirtualNum>
+        <twilioVirtualNumSysProp>+12346010578</twilioVirtualNumSysProp>
         <receiverNum>+919789803687</receiverNum>
 	</properties>
 	<dependencies>
@@ -25,13 +25,12 @@
 			<artifactId>selenium-java</artifactId>
 			<version>4.15.0</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/junit/junit -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
+
+<dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-api</artifactId>
+    <version>5.11.3</version>
+</dependency>
 		<dependency>
 	        <groupId>com.twilio.sdk</groupId>
 	        <artifactId>twilio</artifactId>
@@ -56,7 +55,7 @@
                     <remote>${remote}</remote>
         <twilio_account>${env.TWILIO_ACC}</twilio_account>
         <twilio_token>${env.TWILIO_TOKEN}</twilio_token>
-        <twilioVirtualNum>${twilioVirtualNum}</twilioVirtualNum>
+        <twilioVirtualNum>${twilioVirtualNumSysProp}</twilioVirtualNum>
         <receiverNum>${receiverNum}</receiverNum>
                 </systemPropertyVariables>
             </configuration>
