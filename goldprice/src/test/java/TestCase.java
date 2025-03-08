@@ -1,4 +1,3 @@
-import org.junit.Test;
 
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
@@ -6,6 +5,8 @@ import com.twilio.type.PhoneNumber;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import org.junit.jupiter.api.Test;
 
 import goldprice.Goldprice;
 
@@ -28,7 +29,7 @@ public class TestCase {
 		fetched_date = today_date;
 		}else {
 			fetched_date = provided_day;
-			System.out.println("message will be sent from : "+ System.getProperty("twilioVirtualNum"));
+			
 			System.out.println("requested date: "+provided_day+";");
 			System.out.println("message will be sent from : "+ System.getProperty("twilioVirtualNum"));
 			value = gp.table(provided_day);
