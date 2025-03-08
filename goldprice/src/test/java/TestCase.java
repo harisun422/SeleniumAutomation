@@ -34,7 +34,7 @@ public class TestCase {
 		}
 		
 		gp.exit();
-		
+		System.out.println("message will be sent from : "+ System.getProperty("twilioVirtualNum"));
 		
 		if(value[0] == ""|| value[0] == null || value[0]==" "){
 			System.out.println("failed");
