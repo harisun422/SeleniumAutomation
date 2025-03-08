@@ -28,13 +28,15 @@ public class TestCase {
 		fetched_date = today_date;
 		}else {
 			fetched_date = provided_day;
+			System.out.println("message will be sent from : "+ System.getProperty("twilioVirtualNum"));
 			System.out.println("requested date: "+provided_day+";");
+			System.out.println("message will be sent from : "+ System.getProperty("twilioVirtualNum"));
 			value = gp.table(provided_day);
 			
 		}
 		
 		gp.exit();
-		System.out.println("message will be sent from : "+ System.getProperty("twilioVirtualNum"));
+		
 		
 		if(value[0] == ""|| value[0] == null || value[0]==" "){
 			System.out.println("failed");
