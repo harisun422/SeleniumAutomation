@@ -3,6 +3,7 @@ import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -13,7 +14,7 @@ import goldprice.Goldprice;
 public class TestCase {
 
 	@Test
-	public void testone() throws InterruptedException {
+	public void testone() throws InterruptedException, IOException {
 		Goldprice gp =new Goldprice();
 		String[] value = {"",""};
 		String fetched_date = null;

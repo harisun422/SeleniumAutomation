@@ -1,25 +1,27 @@
 package goldprice;
 
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+
 import io.github.bonigarcia.wdm.WebDriverManager;
-import io.opentelemetry.exporter.logging.SystemOutLogRecordExporter;
 
 public class Goldprice {
 
 	WebDriver driver;
-	public void openWindow(){
+	public void openWindow() throws IOException{
+		Path tempDir = Files.createTempDirectory("chrome-user-data");
 		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--user-data-dir=" + tempDir.toString());
 //		options.addArguments("--headless");
 //		options.setHeadless(true);
 //		options.addArguments("--disable-extensions");
@@ -37,7 +39,7 @@ public class Goldprice {
 		
 		if(!remote) {
 		try{
-			System.out.print("Initializing Local Driver");
+			System.out.println("Initializing Local Driver");
 			driver = new ChromeDriver(options);
 			System.out.print("Local Driver initialized");
 		}catch(Exception e) {
@@ -59,7 +61,7 @@ public class Goldprice {
 		driver.manage().window().maximize();
 	}
 
-	public String[] table(String gdate) throws InterruptedException {
+	public String[] table(String gdate) throws InterruptedException, IOException {
 		
 		openWindow();
 		String[] gold = {"",""};

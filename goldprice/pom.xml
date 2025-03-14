@@ -15,6 +15,11 @@
         <twilio_usertoken>${twilio_token}</twilio_usertoken>-->
         <twilioVirtualNumSysProp>+12346010578</twilioVirtualNumSysProp>
         <receiverNum>+919789803687</receiverNum>
+        
+    
+	  <sonar.organization>harisun422</sonar.organization>
+	  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		
 	</properties>
 	<dependencies>
 
