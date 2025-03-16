@@ -1,32 +1,20 @@
 package goldprice;
 
-import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
-
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Goldprice {
 
 	WebDriver driver;
-	public void openWindow() throws IOException{
-		Path tempDir = Files.createTempDirectory("chrome-user-data");
+	public void openWindow() {
 		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--user-data-dir=" + tempDir.toString());
-//		options.addArguments("--headless");
-//		options.setHeadless(true);
-//		options.addArguments("--disable-extensions");
-//		options.addArguments("--disable-gpu");
-//		options.addArguments("--no-sandbox");
+		
 		WebDriverManager.chromedriver().setup();
 		String remote_text = System.getProperty("remote");
 		
@@ -61,18 +49,18 @@ public class Goldprice {
 		driver.manage().window().maximize();
 	}
 
-	public String[] table(String gdate) throws InterruptedException, IOException {
+	public String[] table(String gdate) throws InterruptedException {
 		
 		openWindow();
-		String[] gold = {"",""};
+		String[] gold = new String [2];
 		try {
-		String day_24k="//table[contains(@class,'gold-rates')]/tbody//td[contains(text(),'"+gdate+"')]/following-sibling::td[1]";
-		String day_22k="//table[contains(@class,'gold-rates')]/tbody//td[contains(text(),'"+gdate+"')]/following-sibling::td[3]";
-		WebElement price_24k=driver.findElement(By.xpath(day_24k));
-		WebElement price_22k=driver.findElement(By.xpath(day_22k));
+		String day24k="//table[contains(@class,'gold-rates')]/tbody//td[contains(text(),'"+gdate+"')]/following-sibling::td[1]";
+		String day22k="//table[contains(@class,'gold-rates')]/tbody//td[contains(text(),'"+gdate+"')]/following-sibling::td[3]";
+		WebElement price24k=driver.findElement(By.xpath(day24k));
+		WebElement price22k=driver.findElement(By.xpath(day22k));
 		
-		gold[0] = price_24k.getText();
-		gold[1] = price_22k.getText();
+		gold[0] = price24k.getText();
+		gold[1] = price22k.getText();
 		System.out.println("Gold Rate on "+ gdate + "\n for 24K is "+gold[0]+ "\n for 22K is "+gold[1]);
 		
 		}
